@@ -17,8 +17,13 @@ function Products(){
          
           }); 
           ; 
-       
+    
+    }
 
+    const ImageProduct = (image) => {
+        if(image !== null) {
+            return (image) ; 
+        }else{ return ''}
     }
 
     const ProductContainer = ({products}) => (
@@ -27,9 +32,8 @@ function Products(){
             products.map(
                 (element) => (
                 <div>
-                    {products[0].image.image_path}
-                
-                    
+                  
+                    <ImageProduct image = {element.image.image_path} /> 
                     {element.title} 
                 </div>
                 ))
