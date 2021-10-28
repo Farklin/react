@@ -1,25 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+import Greetings from './Greeting.js'; 
+import List from './Req.js'; 
+import SimpleForm from './SimplForm.js'; 
+import Products from './Products.js'
+import State from './State.js';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div> 
+      <State /> 
+      <Products /> 
+    </div> 
   );
 }
 
-export default App;
+
+
+export default App; 
+
