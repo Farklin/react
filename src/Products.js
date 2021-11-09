@@ -7,26 +7,15 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 
 class Product extends React.Component {
-    constructor(props) {
+    constructor(props, title, price, image) {
         super(props);
         this.state = {
-            title: null,
-            price: null,
-            image: null,
+            title: title,
+            price: price,
+            image: image,
             nameButton: "В корзину", 
         }
     }
-
-    setTitle(title) {
-        this.setState({title: title})
-    }
-    setPrice(price) {
-        this.setState({price: price})
-    }
-    setImage(image) {
-        this.setState({image: image})
-    }
-
 
     render() {
         return (
@@ -35,7 +24,7 @@ class Product extends React.Component {
                     <CardMedia
                         component="img"
                         height="140"
-                        image={this.state.image}
+                        image={ this.state.image }
                         alt="green iguana"
                     />
                     <CardContent>
@@ -72,14 +61,30 @@ class ProductsList extends React.Component {
         }
     }
 
+    componentDidMount() {
+        fetch('https://teisbubble.ru/api/products')
+        .then(res => res.json())
+        .then(
+            (result ) => {
+                this.setState({
+                        products: result, 
+                    }); 
+                console.log(result); 
+            }, 
+        )
+    }
+
     render() {
+        const  {products} = this.state; 
         return (
-            <div>Товары</div>
+            <ul> 
+                {products.map((item) => <Product title={item.title} image={item.image.thumbnail.toString()} price={item.price} />  ) } 
+            </ul> 
         );
     }
 }
 
-export default Product;
+export default ProductsList;
 
 
 // function Products(){
