@@ -4,54 +4,78 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import {Box, Chip, Rating, Button, CardActionArea, CardActions, Grid, Paper } from '@mui/material';
 
-class Product extends React.Component {
-    constructor(props, title, price, image) {
+
+class CustomRaiting extends React.Component {
+    constructor(props) {
         super(props);
         this.state = {
-            title: title,
-            price: price,
-            image: image,
+            value: 0
+        }
+    }
+    render(){
+        return (
+            <div> 
+                <Rating name="read-only" value={this.props.value} readOnly size="small" />
+            </div> 
+        ); 
+      
+    }
+   
+}
+
+class Product extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: "",
+            price: "",
+            image: "",
+            action: false, 
             nameButton: "В корзину", 
         }
     }
 
+    action(status){
+        if(status){
+            return (<Chip label="Акция" color="warning" />); 
+        }else{ return "" }
+        
+    }
+
     render() {
         return (
-            <Card sx={{ maxWidth: 345 }}>
-                <CardActionArea>
-                    <CardMedia
-                        component="img"
-                        height="140"
-                        image={ this.state.image }
-                        alt="green iguana"
-                    />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                           { this.state.title }
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Lizards are a widespread group of squamate reptiles, with over 6,000
-                            species, ranging across all continents except Antarctica
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
-                <CardActions>
-                    <Button size="small" color="primary">
-                        {this.state.nameButton}
-                    </Button>
-                </CardActions>
+            <Card md={12} sx={{ maxWidth: 400, minHeight: 300, }}>
+                <Box component="div" xs={{m:2}}>
+                    <action status={this.props.action} /> 
+                </Box>
+                <CardMedia
+                    component="img"
+                    minHeight="100%"
+                    minWidth="100%"
+                    image={ this.props.image }
+                    alt="green iguana"
+                />
+                <CardContent>
+                    <Typography component="div">
+                        { this.props.title }
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                    <CustomRaiting value="3" /> 
+                    </Typography>
+                    <Typography variant="h6" color="text.inherit">
+                        { this.props.price } руб.  
+                    </Typography> 
+                </CardContent> 
+                <Button size="small" color="primary">
+                    {this.props.nameButton}
+                </Button>
             </Card>
         );
     }
 
 }
-
-
-
-
-
 
 class ProductsList extends React.Component {
     constructor(props) {
@@ -77,64 +101,17 @@ class ProductsList extends React.Component {
     render() {
         const  {products} = this.state; 
         return (
-            <ul> 
-                {products.map((item) => <Product title={item.title} image={item.image.thumbnail.toString()} price={item.price} />  ) } 
-            </ul> 
+            <Grid container spacing={0}>
+                {
+                    products.map((item) => 
+                        <Grid item sx={{mt:2, p:2}} md={4}>
+                            <Product title = {item.title} price = {item.price} image = {"https://teisbubble.ru" + item.image.thumbnail} action={true}  />
+                        </Grid> 
+                    )
+                }
+            </Grid>
         );
     }
 }
 
 export default ProductsList;
-
-
-// function Products(){
-
-//     const [products, setProducts] = useState([]); 
-
-//     const getProducts = () => {
-//         fetch('http://teisbubble/api/products')
-//         .then((response) => {
-//             return response.json();
-//           })
-//           .then((data) => {
-//             console.log(data[0].image.image_path); 
-//             setProducts(data);  
-
-//           }); 
-//           ; 
-
-//     }
-
-//     const ImageProduct = (image) => {
-//         if(image !== null) {
-//             return (image) ; 
-//         }else{ return ''}
-//     }
-
-//     const ProductContainer = ({products}) => (
-//         <div> 
-//             {
-//             products.map(
-//                 (element) => (
-//                 <div>
-
-//                     <ImageProduct image = {element.image.image_path} /> 
-//                     {element.title} 
-//                 </div>
-//                 ))
-//             }
-
-//         </div> 
-//     ); 
-//     return(
-//         <div> 
-//             <button onClick={getProducts}> Получить товары </button> 
-//             <ProductContainer products={products} /> 
-//         </div> 
-//     ); 
-
-
-
-// }
-
-// export default Products; 
