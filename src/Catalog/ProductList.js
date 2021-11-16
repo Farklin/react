@@ -5,7 +5,8 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import {Box, Chip, Rating, Button, CardActionArea, CardActions, Grid, Paper } from '@mui/material';
-
+import {useParams, useHistory} from 'react-router-dom';
+import {getCategoryProduct} from '../api.js'; 
 
 class CustomRaiting extends React.Component {
     constructor(props) {
@@ -83,17 +84,16 @@ class ProductsList extends React.Component {
         this.state = {
             products: [],
         }
+        const {params} = useParams();
     }
 
     componentDidMount() {
-        fetch('https://teisbubble.ru/api/products')
-        .then(res => res.json())
+        getCategoryProduct(this.params.id)
         .then(
             (result ) => {
                 this.setState({
                         products: result, 
                     }); 
-                console.log(result); 
             }, 
         )
     }
@@ -104,8 +104,8 @@ class ProductsList extends React.Component {
             <Grid container spacing={0}>
                 {
                     products.map((item) => 
-                        <Grid item sx={{mt:2, p:2}} md={4}>
-                            <Product title = {item.title} price = {item.price} image = {"https://teisbubble.ru" + item.image.thumbnail} action={true}  />
+                        <Grid item sx={{mt:2, p:1}} md={4}>
+                            <Product title = {item.title} price = {item.price} image = {""} action={true}  />
                         </Grid> 
                     )
                 }
