@@ -7,7 +7,7 @@ const getAllCategories = async () => {
 };
 // получить товары категории
 const getCategoryProduct = async (id) => {
-    const response = await fetch(API_URL + 'category/' + id);
+    const response = await fetch(API_URL + 'category/87473');
     return await response.json();
 };
 // получить один товар по slug 

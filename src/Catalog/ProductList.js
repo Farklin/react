@@ -1,12 +1,13 @@
 
-import React, { useState } from "react";
+import React from "react";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import {Box, Chip, Rating, Button, CardActionArea, CardActions, Grid, Paper } from '@mui/material';
-import {useParams, useHistory} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import {getCategoryProduct} from '../api.js'; 
+import {useState, useEffect} from 'react';
 
 class CustomRaiting extends React.Component {
     constructor(props) {
@@ -78,40 +79,69 @@ class Product extends React.Component {
 
 }
 
-class ProductsList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            products: [],
+// class ProductsList extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//             products: [],
+//         }
+
+//     }
+
+//     componentDidMount() {
+//         const { id } = this.props.params;
+//         getCategoryProduct(this.props.match.params.id)
+//         .then(
+//             (result ) => {
+//                 this.setState({
+//                         products: result, 
+//                     }); 
+//             }, 
+//         )
+//     }
+
+//     render() {
+//         const  {products} = this.state; 
+//         return (
+//             <Grid container spacing={0}>
+//                 {
+//                     products.map((item) => 
+//                         <Grid item sx={{mt:2, p:1}} md={4}>
+//                             <Product title = {item.title} price = {item.price} image = {""} action={true}  />
+//                         </Grid> 
+//                     )
+//                 }
+//             </Grid>
+//         );
+//     }
+// }
+
+function ProductList() {
+
+    const params = useParams();
+
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+    getCategoryProduct(params.id).then(data => {
+        setProducts(data.data);
+        setLoading(false);
+        console.log(data.data); 
+    });
+    }, [params.id]);
+
+    return (
+        <Grid container spacing={0}>
+        {
+            products.map((item) => 
+                <Grid item sx={{mt:2, p:1}} md={4}>
+                    <Product title = {item.title} price = {item.price} image = {""} action={true}  />
+                </Grid> 
+            )
         }
-        const {params} = useParams();
-    }
-
-    componentDidMount() {
-        getCategoryProduct(this.params.id)
-        .then(
-            (result ) => {
-                this.setState({
-                        products: result, 
-                    }); 
-            }, 
-        )
-    }
-
-    render() {
-        const  {products} = this.state; 
-        return (
-            <Grid container spacing={0}>
-                {
-                    products.map((item) => 
-                        <Grid item sx={{mt:2, p:1}} md={4}>
-                            <Product title = {item.title} price = {item.price} image = {""} action={true}  />
-                        </Grid> 
-                    )
-                }
-            </Grid>
-        );
-    }
+        </Grid>
+    );
 }
 
-export default ProductsList;
+export default ProductList;
