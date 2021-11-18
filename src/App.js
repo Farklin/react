@@ -12,6 +12,7 @@ import {
   Outlet
 } from 'react-router-dom';
 import Catalog from './Catalog/Catalog';
+import Product from './Product/Product'; 
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="catalog/:id" element={<Catalog />} />
+        <Route path="product/:id" element={<Product />} />
       </Routes>
     </BrowserRouter>
     </div> 

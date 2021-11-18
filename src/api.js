@@ -11,15 +11,12 @@ const getCategoryProduct = async (id) => {
   return await response.json();
 };
 // получить один товар по slug
-const getOneProduct = async (slug) => {
-  const response = await fetch(API_URL + "product/" + slug);
+const getOneProduct = async (id) => {
+  const response = await fetch(API_URL + "product/" + id);
   return await response.json();
 };
 
 // получить все товары
-const getOneProducts = async (slug) => {
-  const response = await fetch(API_URL + "product/" + slug);
-  return await response.json();
-};
 
-export { getAllCategories, getCategoryProduct, getOneProduct, getOneProducts };
+
+export { getAllCategories, getCategoryProduct, getOneProduct };

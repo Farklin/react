@@ -6,46 +6,29 @@ import Typography from "@mui/material/Typography";
 import {
   Box,
   Chip,
-  Rating,
   Button,
   CardActionArea,
   CardActions,
   Grid,
+  Rating, 
   Paper,
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { getCategoryProduct } from "../api.js";
 import { useState, useEffect } from "react";
+import { Link } from "@mui/material";
 
-class CustomRaiting extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 0,
-    };
-  }
-  render() {
-    return (
-      <div>
-        <Rating
-          name="read-only"
-          value={this.props.value}
-          readOnly
-          size="small"
-        />
-      </div>
-    );
-  }
-}
 
 class Product extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: 0, 
       title: "",
       price: "",
       image: "",
       action: false,
+      href: "", 
       nameButton: "В корзину",
     };
   }
@@ -61,6 +44,7 @@ class Product extends React.Component {
   render() {
     return (
       <Card md={12} sx={{ maxWidth: 400, minHeight: 300 }}>
+        <Link href={"/product/" + this.props.id} >
         <Box component="div" xs={{ m: 2 }}>
           <action status={this.props.action} />
         </Box>
@@ -74,12 +58,18 @@ class Product extends React.Component {
         <CardContent>
           <Typography component="div">{this.props.title}</Typography>
           <Typography variant="body2" color="text.secondary">
-            <CustomRaiting value="3" />
+            <Rating
+            name="read-only"
+            value={3}
+            readOnly
+            size="small"
+          />
           </Typography>
           <Typography variant="h6" color="text.inherit">
             {this.props.price} руб.
           </Typography>
         </CardContent>
+        </Link> 
         <Button size="small" color="primary">
           {this.props.nameButton}
         </Button>
@@ -144,9 +134,10 @@ function ProductList() {
       {products.map((item) => (
         <Grid item sx={{ mt: 2, p: 1 }} md={4}>
           <Product
+            id = {item.id}
             title={item.title}
             price={item.price}
-            image={item.image[0].preview}
+            image={item.image[0].path}
             action={true}
           />
         </Grid>
