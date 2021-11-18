@@ -24,7 +24,7 @@ class Header extends React.Component {
                   >
                   </IconButton>
                   <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    TeisBubble
+                    Дом Керамики
                   </Typography>
                   <Search /> 
                   <Button color="inherit">Login</Button>
