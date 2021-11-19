@@ -9,9 +9,9 @@ import {
   Paper,
 } from "@mui/material";
 import ProductList from "./ProductList";
-import Sitebar from "../Components/Sitebar";
+import Sitebar from "../Navigation/Sitebar";
 
-class Catalog extends React.Component {
+class Category extends React.Component {
   render() {
     return (
       <Container>
@@ -28,4 +28,4 @@ class Catalog extends React.Component {
   }
 }
 
-export default Catalog;
+export default Category;

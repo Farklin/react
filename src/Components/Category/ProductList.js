@@ -14,9 +14,10 @@ import {
   Paper,
 } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { getCategoryProduct } from "../api.js";
+import { getCategoryProduct } from "../../api.js";
 import { useState, useEffect } from "react";
 import { Link } from "@mui/material";
+import memoize from "lodash.memoize";
 
 
 class Product extends React.Component {
@@ -50,7 +51,7 @@ class Product extends React.Component {
         </Box>
         <CardMedia
           component="img"
-          minHeight="100%"
+          maxHeight="100%"
           minWidth="100%"
           image={this.props.image}
           alt="green iguana"

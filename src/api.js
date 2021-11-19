@@ -1,5 +1,5 @@
 import { API_URL } from "./config";
-
+import memoize from "lodash.memoize";
 // получить все категории
 const getAllCategories = async () => {
   const response = await fetch(API_URL + "categories");
@@ -16,7 +16,12 @@ const getOneProduct = async (id) => {
   return await response.json();
 };
 
-// получить все товары
+const getAllProducts = async () => {
+  const response = await fetch(API_URL + "products/");
+  return await response.json();
+};
 
 
-export { getAllCategories, getCategoryProduct, getOneProduct };
+
+
+export { getAllCategories, getCategoryProduct, getOneProduct, getAllProducts };

@@ -1,9 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { Box, Container, Button, CardActionArea, CardActions, Grid, Paper } from '@mui/material';
-import Header from './Components/Header'; 
-import Content from './Content.js'; 
-import ProductList from './Catalog/ProductList'
+import Header from './Components/General/Header/Header'; 
 import {
   BrowserRouter,
   Routes,
@@ -11,8 +9,8 @@ import {
   Link,
   Outlet
 } from 'react-router-dom';
-import Catalog from './Catalog/Catalog';
-import Product from './Product/Product'; 
+import Category from './Components/Category/Category';
+import Product from './Components/Product/Product'; 
 
 function App() {
   return (
@@ -20,7 +18,7 @@ function App() {
     <Header />
     <BrowserRouter>
       <Routes>
-        <Route path="catalog/:id" element={<Catalog />} />
+        <Route path="catalog/:id" element={<Category />} />
         <Route path="product/:id" element={<Product />} />
       </Routes>
     </BrowserRouter>

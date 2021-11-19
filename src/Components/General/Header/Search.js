@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
+import { getAllProducts }  from "../../../api.js"; 
 
 class Search extends React.Component {
     constructor(props) {
@@ -13,8 +14,7 @@ class Search extends React.Component {
     }
 
     componentDidMount() {
-        fetch('http://127.0.0.1:8000/api/products')
-        .then(res => res.json())
+        getAllProducts()
         .then(
             (result ) => {
                 this.setState({

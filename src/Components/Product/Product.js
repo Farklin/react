@@ -1,7 +1,7 @@
 import React from "react";
 import {useParams} from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getOneProduct } from "../api.js"; 
+import { getOneProduct } from "../../api.js"; 
 import { Typography,Card, Rating, Box, Container, Button, CardActionArea, CardActions, Grid, Paper } from '@mui/material';
 
 /**

@@ -1,6 +1,6 @@
 import { Routes ,Route } from 'react-router-dom';
 import ProductList from './Catalog/ProductList';
-import ProductPage from './Product/Product';
+import ProductPage from './Components/Product/Product';
 
 export default function Content() {
     return (
