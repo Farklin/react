@@ -21,7 +21,15 @@ const getAllProducts = async () => {
   return await response.json();
 };
 
+const getPaginationCategory = async (id) => {
+  const responce = await fetch(API_URL + "category/" + id);
+  return await responce.json();
+};
 
-
-
-export { getAllCategories, getCategoryProduct, getOneProduct, getAllProducts };
+export {
+  getAllCategories,
+  getCategoryProduct,
+  getOneProduct,
+  getAllProducts,
+  getPaginationCategory,
+};

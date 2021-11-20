@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import ProductList from "./ProductList";
 import Sitebar from "../Navigation/Sitebar";
+import PaginationCategory from "../Generic/Pagination";
 
 class Category extends React.Component {
   render() {
@@ -21,6 +22,7 @@ class Category extends React.Component {
           </Grid>
           <Grid item md={9}>
             <ProductList />
+            <PaginationCategory />
           </Grid>
         </Grid>
       </Container>

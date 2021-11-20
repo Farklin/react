@@ -1,14 +1,36 @@
-import React from 'react'
-import { Pagination } from "@material-ui/";
+import React from "react";
+import { Pagination } from "@mui/material";
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { getPaginationCategory } from "../../api.js";
 
-function Pagination(current_page, last_page) {
-    return ( <
-        div >
-        <
-        Pagination count = { 10 }
-        />   <
-        /div >
-    )
+function PaginationCategory() {
+  const params = useParams();
+  const [meta, setMeta] = useState();
+  const [page, setPage] = useState();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getPaginationCategory(params.id).then((data) => {
+      setMeta(data.meta);
+      setLoading(false);
+      console.log(data.meta);
+    });
+  }, [params.id]);
+
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+
+  if (!loading) {
+    return (
+      <div>
+        <Pagination count={meta.last_page} onChange={handleChange} />
+      </div>
+    );
+  } else {
+    return <div>Загрузка ...</div>;
+  }
 }
 
-export default Pagination
+export default PaginationCategory;

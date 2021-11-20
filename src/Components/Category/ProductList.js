@@ -10,7 +10,7 @@ import {
   CardActionArea,
   CardActions,
   Grid,
-  Rating, 
+  Rating,
   Paper,
 } from "@mui/material";
 import { useParams } from "react-router-dom";
@@ -19,17 +19,16 @@ import { useState, useEffect } from "react";
 import { Link } from "@mui/material";
 import memoize from "lodash.memoize";
 
-
 class Product extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: 0, 
+      id: 0,
       title: "",
       price: "",
       image: "",
       action: false,
-      href: "", 
+      href: "",
       nameButton: "В корзину",
     };
   }
@@ -45,32 +44,27 @@ class Product extends React.Component {
   render() {
     return (
       <Card md={12} sx={{ maxWidth: 400, minHeight: 300 }}>
-        <Link href={"/product/" + this.props.id} >
-        <Box component="div" xs={{ m: 2 }}>
-          <action status={this.props.action} />
-        </Box>
-        <CardMedia
-          component="img"
-          maxHeight="100%"
-          minWidth="100%"
-          image={this.props.image}
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography component="div">{this.props.title}</Typography>
-          <Typography variant="body2" color="text.secondary">
-            <Rating
-            name="read-only"
-            value={3}
-            readOnly
-            size="small"
+        <Link href={"/product/" + this.props.id}>
+          <Box component="div" xs={{ m: 2 }}>
+            <action status={this.props.action} />
+          </Box>
+          <CardMedia
+            component="img"
+            maxHeight="100%"
+            minWidth="100%"
+            image={this.props.image}
+            alt="green iguana"
           />
-          </Typography>
-          <Typography variant="h6" color="text.inherit">
-            {this.props.price} руб.
-          </Typography>
-        </CardContent>
-        </Link> 
+          <CardContent>
+            <Typography component="div">{this.props.title}</Typography>
+            <Typography variant="body2" color="text.secondary">
+              <Rating name="read-only" value={3} readOnly size="small" />
+            </Typography>
+            <Typography variant="h6" color="text.inherit">
+              {this.props.price} руб.
+            </Typography>
+          </CardContent>
+        </Link>
         <Button size="small" color="primary">
           {this.props.nameButton}
         </Button>
@@ -135,7 +129,7 @@ function ProductList() {
       {products.map((item) => (
         <Grid item sx={{ mt: 2, p: 1 }} md={4}>
           <Product
-            id = {item.id}
+            id={item.id}
             title={item.title}
             price={item.price}
             image={item.image[0].path}
