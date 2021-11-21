@@ -13,7 +13,7 @@ import {
   Rating,
   Paper,
 } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { getCategoryProduct } from "../../api.js";
 import { useState, useEffect } from "react";
 import { Link } from "@mui/material";
@@ -111,13 +111,15 @@ class Product extends React.Component {
 // }
 
 function ProductList() {
+  const { search } = useLocation();
   const params = useParams();
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getCategoryProduct(params.id).then((data) => {
+    console.log(params.id + search);
+    getCategoryProduct(params.id + search).then((data) => {
       setProducts(data.data);
       setLoading(false);
       console.log(data.data);

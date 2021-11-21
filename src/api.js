@@ -1,5 +1,6 @@
 import { API_URL } from "./config";
 import memoize from "lodash.memoize";
+
 // получить все категории
 const getAllCategories = async () => {
   const response = await fetch(API_URL + "categories");
